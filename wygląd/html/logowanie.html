@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logowanie</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: rgb(224, 223, 220);">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(0, 140, 255);">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html" style="color: rgb(0, 0, 0);">>Faily</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropstart">
+              <a class="nav-link dropdown-toggle" href="#" id="kontoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(0, 0, 0);">
+                Konto
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="kontoDropdown">
+                <li><a class="dropdown-item" href="konto.html">Przejdź do konta</a></li>
+                <li><a class="dropdown-item" href="logowanie.html">Logowanie</a></li>
+                <li><a class="dropdown-item" href="wyloguj.html">Wyloguj</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(0, 0, 0);">
+                ...
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreDropdown">
+                <li><a class="dropdown-item" href="ustawienia.html">Ustawienia</a></li>
+                <li><a class="dropdown-item" href="dodawanie_wydarzen.html">Dodaj wydarzenie</a></li>
+                <li><a class="dropdown-item" href="lista_wydarzen.html">Przejdź do listy wydarzeń</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Logowanie</h3>
+            <form action="logowanie.php" method="post">
+              <div class="mb-3">
+                <label for="email" class="form-label">Adres email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Wprowadź email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Hasło</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Wprowadź hasło" required>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <button type="submit" class="btn btn-primary">Zaloguj się</button>
+                <a href="przypomnij_haslo.html" class="text-decoration-none">Przypomnij hasło</a>
+              </div>
+            </form>
+            <hr>
+            <div class="text-center">
+              <p>Nie masz konta? <a href="rejestracja.html">Załóż konto</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
