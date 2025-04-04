@@ -3,23 +3,252 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel + Vue + Bootstrap</title>
+    <title>Faily</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">My App</a>
+<body style="background-color: rgb(224, 223, 220);">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(0, 140, 255);">
+        <div class="container-fluid">
+            <!-- Logo + napis -->
+            <a class="navbar-brand fs-3 text-white" href="#">
+                <img src="{{ Vite::asset('resources/images/includes/logo.png') }}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+                Faily
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropstart">
+                        <a class="nav-link dropdown-toggle" href="#" id="kontoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(0, 0, 0);">
+                            Konto
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="kontoDropdown">
+                            <li><a class="dropdown-item" href="konto.html">Przejdź do konta</a></li>
+                            <li><a class="dropdown-item" href="logowanie.html">Logowanie</a></li>
+                            <li><a class="dropdown-item" href="wyloguj.html">Wyloguj</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(0, 0, 0);">
+                            ...
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreDropdown">
+                            <li><a class="dropdown-item" href="ustawienia.html">Ustawienia</a></li>
+                            <li><a class="dropdown-item" href="dodawanie_wydarzen.html">Dodaj wydarzenie</a></li>
+                            <li><a class="dropdown-item" href="lista_wydarzen.html">Przejdź do listy wydarzeń</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        
-        <div class="container mt-3">
-            <h1>
-                To jest statyczny nagłówek HTML
-            </h1>
-            <example-component></example-component>
+        </div>
+    </nav>
+</header>
+
+<main class="container mt-5 mb-5">
+    <h2>Wszystkie wydarzenia:</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie1.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie2.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie3.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie1.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie2.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie3.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie1.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie2.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie3.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie1.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie2.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie3.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie1.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie2.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-black" style="background-color: rgb(0, 140, 255);">
+                <a href="wydarzenie.html">
+                    <img src="zdjecie3.png" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Tytuł wydarzenia">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">Tytuł wydarzenia</h5>
+                    <p class="card-text">Miasto, ulica, nr.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div class="container mt-5 py-5 newsletter-section rounded-3 shadow" style="background-color: rgb(0, 140, 255);">
+    <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+            <h2 class="fw-bold">Chcesz być informowany o wydarzeniach?</h2>
+            <p class="text-muted">Dodaj swój email i ciesz się stałym kontaktem z nowymi wydarzeniami!</p>
+        </div>
+        <div class="col-md-6">
+            <form class="d-flex">
+                <input type="email" class="form-control me-2 rounded-pill shadow-sm" placeholder="Enter your email" aria-label="Enter your email" required>
+                <button class="btn btn-primary px-4 rounded-pill shadow-sm" type="submit">Dodaj</button>
+            </form>
+            <small class="d-block mt-2 text-muted">Szanujemy Twoją prywatność. Wyłącz powiadomienia w każdym momencie.</small>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-3">
+    © 2025 Find an Idiot Like You!
+</footer>
 </body>
 </html>

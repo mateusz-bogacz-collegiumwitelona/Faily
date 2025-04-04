@@ -1,13 +1,17 @@
+@import 'bootstrap/dist/css/bootstrap.css';
 /* Możesz dodać własne style niestandardowe poniżej */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f8f9fa;
 }
+.btn
+{
+    background-color: #50caf3;
+}
 
 .container {
     margin-top: 20px;
 }
-
 h1 {
     color: blue;
 }
