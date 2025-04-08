@@ -1,27 +1,92 @@
 @import 'bootstrap/dist/css/bootstrap.css';
-/* Możesz dodać własne style niestandardowe poniżej */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
+
+/* Reset + layout główny */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Zapobiega niepotrzebnemu przewijaniu */
 }
-.btn
-{
-    background-color: #50caf3;
+
+#app {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* Kluczowe dla poprawnego zachowania flexbox */
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* Kluczowe dla poprawnego zachowania flexbox */
+}
+
+/* Mapa na pełną szerokość i wysokość */
+.map-fullwidth {
+    width: 100%;
+    height: 100%; /* Zmiana z 100vh na 100% */
+    position: relative;
+    flex: 1;
+    min-height: 0; /* Kluczowe dla poprawnego zachowania flexbox */
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 100% !important;
+}
+
+/* Dodatkowe klasy */
+.btn {
+    background-color: #181f37;
 }
 
 .container {
     margin-top: 20px;
 }
+
 h1 {
     color: blue;
 }
 
-/* Przykładowe style dla komponentów */
 .card {
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    height: 100%;
+    flex-shrink: 0; /* Zapobiega zmniejszaniu się nawigacji */
+    background-color: #2055a3 !important;
 }
+
+footer {
+    flex-shrink: 0; /* Zapobiega zmniejszaniu się stopki */
+}
+
+/* Dropdown naprawy */
+.dropdown-menu {
+    z-index: 1000;
+}
+
+.leaflet-control-container .leaflet-top,
+.leaflet-control-container .leaflet-bottom {
+    z-index: 999;
+}
+
+/* Responsive: zmiana wysokości mapy nie jest już potrzebna */
+@media (max-width: 768px) {
+    .map-fullwidth {
+        height: 100%; /* Zmiana z 100vh na 100% */
+    }
+}
+/*kolorki
+.color1 {color: #120907;}
+.color2 {color: #181f37;}
+.color3 {color: #4a588b;}
+.color4 {color: #829ae5;}
+.color5 {color: #b5d5eb;}
+ */
