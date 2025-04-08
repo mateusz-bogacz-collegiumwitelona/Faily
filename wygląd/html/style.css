@@ -1,0 +1,106 @@
+body, .bg-main {
+  background-color: rgb(224, 223, 220);
+}
+
+.navbar, .nav-bg {
+  background-color: rgb(0, 140, 255);
+}
+
+.navbar-brand img, .nav-logo-img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.nav-logo {
+  color: black;
+}
+
+.custom-dropdown-btn {
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #000;
+  padding: 0.375rem 0.75rem;
+}
+.custom-dropdown-btn:hover,
+.custom-dropdown-btn:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+.card-title {
+  font-weight: bold;
+}
+.centered-form {
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.custom-card-bg {
+  background-color: rgb(0, 140, 255);
+}
+.event-img {
+  height: 250px;
+  object-fit: cover;
+}
+
+.newsletter-section {
+  background-color: rgb(0, 140, 255);
+}
+
+.pagination {
+  margin-top: 2rem;
+}
+.pagination .page-link {
+  background-color: #f8f9fa;
+  color: #000;
+}
+.pagination .page-item.active .page-link {
+  background-color: #0c63e4 !important;
+  border-color: #0c63e4 !important;
+  color: #fff !important;
+}
+
+.carousel-inner {
+  background-color: #f8f9fa;
+}
+.carousel-inner img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-height: 700px;
+  object-fit: contain;
+}
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7l4.647 4.646a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+}
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 0 0 .708L9.293 7 4.646 11.646a.5.5 0 0 0 .708.708l5-5a.5.5 0 0 0 0-.708l-5-5a.5.5 0 0 0-.708 0z'/%3E%3C/svg%3E");
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+body, .bg-main {
+  background-color: rgb(224, 223, 220);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
