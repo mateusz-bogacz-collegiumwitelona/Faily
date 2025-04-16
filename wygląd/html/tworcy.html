@@ -92,13 +92,21 @@
         </p>
       </div>
 
+      <div class="text-center my-5">
+        <h2>Chcesz dowiedzieć się o nas więcej?</h2>
+        <div class="text-center my-4">
+          <button onclick="downloadAndOpenPDF()" class="btn btn-primary">
+            Pobierz książkę o powstaniu legędy
+          </button>
+        </div>        
+      </div>
+
       <h2>
       <div class="text-center">
         'PANIE ŁASKAWY DAJ NAM 5'
       </div>
       </h2>
     </main>
-
 
     <footer class="bg-dark text-white text-center py-3">
       © 2025 Find an Idiot Like You!
@@ -109,6 +117,11 @@
     function showDescription(name) {
       document.querySelectorAll('.member-description').forEach(el => el.classList.remove('active'));
       document.getElementById('desc-' + name).classList.add('active');
+    }
+  
+    function downloadAndOpenPDF() {
+      const filePath = "includes/faily-narodziny legędy.pdf";
+      window.open(filePath, '_blank');
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
