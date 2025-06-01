@@ -17,7 +17,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check() || Auth::user()->role !== 'admin') {
-            return redirect()->route('welcome')->with('error', 'Permission denied.');
+            return redirect()->route('index')->with('error', 'Permission denied.');
         }
 
         return $next($request);
