@@ -41,7 +41,18 @@
                 <tr>
                     <td>
                         <div class="d-flex align-items-center">
-                            <img src="{{ $attendee->user->avatar }}" class="rounded-circle me-2" width="40" alt="{{ $attendee->user->name }}">
+                            @if($attendee->user->photo_path)
+                                <img src="{{ Storage::url($attendee->user->photo_path) }}"
+                                     class="rounded-circle me-2"
+                                     width="40"
+                                     alt="{{ $attendee->user->name }}"
+                                     onerror="this.src='{{ asset('images/includes/default-avatar.png') }}'">
+                            @else
+                                <img src="{{ asset('images/includes/default-avatar.png') }}"
+                                     class="rounded-circle me-2"
+                                     width="40"
+                                     alt="{{ $attendee->user->name }}">
+                            @endif
                             <div>
                                 <div>{{ $attendee->user->name }}</div>
                                 <small>{{ $attendee->user->email }}</small>

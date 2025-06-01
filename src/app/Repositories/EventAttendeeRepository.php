@@ -50,7 +50,7 @@ class EventAttendeeRepository extends BaseRepository implements EventAttendeeRep
     public function getUserAttendees($userId)
     {
         $now = Carbon::now();
-        $oneDayAgo = $now->subDay();
+        $oneDayAgo = $now->copy()->subDay();
 
         return $this->model
             ->where('user_id', $userId)
@@ -65,7 +65,7 @@ class EventAttendeeRepository extends BaseRepository implements EventAttendeeRep
             ->whereHas('event', function($query) use ($now) {
                 $query->where('date', '>=', $now->toDateString());
             })
-            ->latest()
-            ->get();
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     }
 }

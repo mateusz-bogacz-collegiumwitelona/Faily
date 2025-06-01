@@ -7,11 +7,9 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\EventAttendeeController;
 use App\Http\Controllers\Api\PhotoController;
 use App\Http\Controllers\Api\RideController;
-use App\Http\Controllers\Api\RideRequestController;
-use App\Http\Controllers\Api\TestApiController;
 use Illuminate\Support\Facades\Http;
 
-Route::get("/test", [TestApiController::class, "test"]);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 

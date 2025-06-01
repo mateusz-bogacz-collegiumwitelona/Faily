@@ -137,7 +137,14 @@ class EventController extends Controller
         }
 
         if ($request->boolean('has_available_spots')) {
-            $query->whereRaw('people_count > (SELECT COALESCE(SUM(attendees_count), 0) FROM attendees WHERE event_id = events.id AND status = "accepted")');
+            $query->where(function($q) {
+                $q->whereColumn('people_count', '>', function($subQuery) {
+                    $subQuery->selectRaw('COALESCE(SUM(attendees_count), 0)')
+                        ->from('event_attendees')
+                        ->whereColumn('event_attendees.event_id', 'events.id')
+                        ->where('status', 'accepted');
+                });
+            });
         }
 
         $events = $query->paginate(3);

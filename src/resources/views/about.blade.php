@@ -156,7 +156,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <video width="100%" height="auto" autoplay controls id="modalVideo">
+                            <video width="100%" height="auto" controls id="modalVideo">
                                 <source src="{{ asset('video/dziwny_pomysl_wodza.mp4') }}" type="video/mp4">
                             </video>
                         </div>

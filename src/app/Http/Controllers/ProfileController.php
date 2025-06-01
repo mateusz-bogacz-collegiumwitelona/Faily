@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Services\Interfaces\UserServiceInterface;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -101,5 +102,16 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             return back()->withErrors(['password' => $e->getMessage()]);
         }
+    }
+
+    public function showUserProfile(User $user)
+    {
+        $isOwnProfile = Auth::check() && Auth::id() === $user->id;
+
+        if ($isOwnProfile) {
+            return redirect('/account');
+        }
+
+        return view('account', compact('user'));
     }
 }

@@ -91,5 +91,14 @@ class EventAttendeeController extends Controller
                 ->with('error', $e->getMessage());
         }
     }
+
+    public function myApplications()
+    {
+        $userId = Auth::id();
+
+        $applicationData = $this->eventAttendeeService->getUserApplicationsData($userId);
+
+        return view('events.my-applications', $applicationData);
+    }
 }
 

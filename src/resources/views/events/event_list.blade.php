@@ -21,17 +21,25 @@
         @forelse($events as $event)
                 <div class="card shadow-sm mb-4 text-color lift-card">
                     <div class="card-header d-flex align-items-center gap-3">
-                        @if($event->user->photo_path)
-                            <img src="{{ asset('storage/' . $event->user->photo_path) }}"
-                                 class="rounded-circle border border-2 border-light"
-                                 alt="{{ __('messages.eventlist.profilePhotoLabel') }}" width="50" height="50" style="object-fit: cover;">
-                        @else
-                            <img src="{{ asset('images/includes/default-avatar.png') }}"
-                                 class="rounded-circle border border-2 border-light"
-                                 alt="{{ __('messages.eventlist.profilePhotoLabel') }}" width="50" height="50" style="object-fit: cover;">
-                        @endif
+                        <a href="{{ route('user.profile', $event->user) }}" class="text-decoration-none">
+                            @if($event->user->photo_path)
+                                <img src="{{ asset('storage/' . $event->user->photo_path) }}"
+                                     class="rounded-circle border border-2 border-light hover-lift"
+                                     alt="{{ __('messages.eventlist.profilePhotoLabel') }}"
+                                     width="50" height="50"
+                                     style="object-fit: cover; transition: transform 0.2s ease;">
+                            @else
+                                <img src="{{ asset('images/includes/default-avatar.png') }}"
+                                     class="rounded-circle border border-2 border-light hover-lift"
+                                     alt="{{ __('messages.eventlist.profilePhotoLabel') }}"
+                                     width="50" height="50"
+                                     style="object-fit: cover; transition: transform 0.2s ease;">
+                            @endif
+                        </a>
                         <div>
-                            <h6 class="mb-1 fw-bold">{{ $event->user->name }}</h6>
+                            <a href="{{ route('user.profile', $event->user) }}" class="text-decoration-none">
+                                <h6 class="mb-1 fw-bold text-color_2 hover-underline">{{ $event->user->name }}</h6>
+                            </a>
                             <small class="text-light">{{ $event->created_at->diffForHumans() }}</small>
                         </div>
                     </div>

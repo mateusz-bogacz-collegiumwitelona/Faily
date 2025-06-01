@@ -14,7 +14,6 @@
         ob_start();
     @endphp
 
-
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid nav-wrapper px-2">
@@ -59,6 +58,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item text-color" href="{{ url('/account') }}">{{ __('messages.navbar.goToAccount') }}</a></li>
+                                <li><a class="dropdown-item text-color" href="{{ route('my-applications') }}">{{ __('messages.navbar.myApplications') }}</a></li>
                                 <li><a class="dropdown-item text-color" href="{{ url('/my_events') }}">{{ __('messages.navbar.myEvents') }}</a></li>
                                 <li><a class="dropdown-item text-color" href="{{ url('/help') }}">{{ __('messages.navbar.help') }}</a></li>
                                 <li><a class="dropdown-item text-color" href="{{ url('/profile/dashboard') }}">{{ __('messages.navbar.settings') }}</a></li>
@@ -69,10 +69,8 @@
                                 @endif
                                 <li><hr class="dropdown-divider bg-white"></li>
                                 <li>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item text-color">{{ __('messages.navbar.signOut') }}</button>
-                                    </form>
+                                    <!-- PLACEHOLDER dla formularza wylogowania - zostanie zastąpiony poza cache -->
+                                    <div id="logout-form-placeholder"></div>
                                 </li>
                             </ul>
                         </div>
@@ -124,3 +122,21 @@
         }
     @endphp
 @endif
+
+@auth
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const placeholder = document.getElementById('logout-form-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = `
+                <form method="POST" action="{{ route('logout') }}" style="margin: 0; padding: 0;">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="dropdown-item text-color" style="border: none; background: none; width: 100%; text-align: left;">
+                        {{ __('messages.navbar.signOut') }}
+                </button>
+            </form>
+`;
+            }
+        });
+    </script>
+@endauth

@@ -48,7 +48,8 @@ return [
         'adminDashboard' => 'Panel administratora',
         'usersReports' => 'Zgłoszenia użytkowników',
         'usersMenagement' => 'Zarządzanie użytkownikami',
-        'attendeesList' => 'Lista zgłoszeń'
+        'attendeesList' => 'Lista zgłoszeń',
+        'myApplications' => 'Moje Zgłoszenia - Faily',
 
     ],
 
@@ -65,6 +66,7 @@ return [
         'signOut' => 'Wyloguj się',
         'signIn' => 'Zaloguj się',
         "admin" => "Administrator",
+        "myApplications" => 'Moje zgłoszenia'
     ],
     'profilemenu' => [
         'myAccount' => 'Moje konto',
@@ -646,4 +648,26 @@ return [
       'logout' => 'Wyloguj się',
     ],
 
+    'myapplications' => [
+        'myApplications' => 'Moje Zgłoszenia',
+        'eventApplications' => 'Zgłoszenia na Wydarzenia',
+        'rideApplications' => 'Zgłoszenia na Przejazdy',
+        'date' => 'Data:',
+        'location' => 'Lokalizacja:',
+        'organizer' => 'Organizator:',
+        'driver' => 'Kierowca:',
+        'vehicle' => 'Pojazd:',
+        'meetingPoint' => 'Punkt spotkania:',
+        'accepted' => 'Zaakceptowane',
+        'rejected' => 'Odrzucone',
+        'pending' => 'Oczekuje',
+        'attendeesCount' => 'Liczba uczestników:',
+        'message' => 'Wiadomość:',
+        'appliedOn' => 'Zgłoszono:',
+        'viewEvent' => 'Zobacz Wydarzenie',
+        'cancelApplication' => 'Anuluj Zgłoszenie',
+        'cancelConfirm' => 'Czy na pewno chcesz anulować to zgłoszenie?',
+        'noEventApplications' => 'Nie masz żadnych zgłoszeń na wydarzenia.',
+        'noRideApplications' => 'Nie masz żadnych zgłoszeń na przejazdy.',
+    ],
 ];

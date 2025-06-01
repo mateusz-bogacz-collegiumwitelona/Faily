@@ -8,6 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\EventAttendee;
 use App\Models\Event;
+use Carbon\Carbon;
 
 class EventAttendeeStatusChanged extends Notification implements ShouldQueue
 {
@@ -42,7 +43,7 @@ class EventAttendeeStatusChanged extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        if ($this->rideRequest->status === 'accepted') {
+        if ($this->eventAttendee->status === 'accepted') {
             return $this->buildAcceptedEmail($notifiable);
         } else {
             return $this->buildRejectedEmail($notifiable);
@@ -57,25 +58,33 @@ class EventAttendeeStatusChanged extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'event_attendee_id' => $this->eventAttendee->id,
+            'event_id' => $this->event->id,
+            'event_title' => $this->event->title,
+            'old_status' => $this->oldStatus,
+            'new_status' => $this->eventAttendee->status,
+            'attendees_count' => $this->eventAttendee->attendees_count,
         ];
     }
 
     protected function buildAcceptedEmail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Your request for a ride has been approved!')
-            ->greeting('Hello ' . $notifiable->name . ' sir!')
-            ->line('Your request for a ride to the event  "' . $this->ride->event->title . '" has been accepted by the driver ' . $this->driver->name . '.')
-            ->line('Details of the ride:')
-            ->line('• Date of event: ' . $this->ride->event->date->format('d.m.Y H:i'))
-            ->line('• Meeting place: ' . $this->ride->meeting_location_name)
-            ->line('• Vehicle: ' . $this->ride->vehicle_description)
-            ->when($this->driver->phone && !empty(trim($this->driver->phone)), function ($message) {
-                return $message->line('• Driver contact: ' . $this->driver->phone);
+            ->subject('Your event attendance has been approved!')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line('Great news! Your request to attend the event "' . $this->event->title . '" has been accepted by the organizer.')
+            ->line('Event details:')
+            ->line('• Title: ' . $this->event->title)
+            ->line('• Date: ' . Carbon::parse($this->event->date)->format('d.m.Y H:i'))
+            ->line('• Location: ' . ($this->event->location_name ?? $this->event->location ?? 'TBA'))
+            ->when($this->eventAttendee->attendees_count > 1, function ($message) {
+                return $message->line('• Number of attendees: ' . $this->eventAttendee->attendees_count);
             })
-            ->action('See event details', url('/events/' . $this->ride->event_id))
-            ->line('We remind you to be punctual and inform the driver of any changes in plans.')
+            ->when($this->event->user && $this->event->user->phone, function ($message) {
+                return $message->line('• Organizer contact: ' . $this->event->user->phone);
+            })
+            ->action('View event details', url('/events/' . $this->event->id))
+            ->line('We remind you to be punctual and inform the organizer of any changes in your plans.')
             ->salutation('Thank you for using our application!')
             ->salutation('Team Faily');
     }
@@ -83,12 +92,15 @@ class EventAttendeeStatusChanged extends Notification implements ShouldQueue
     protected function buildRejectedEmail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Information about your transit request')
-            ->greeting('Hello ' . $notifiable->name . 'sir!')
-            ->line('Unfortunately, your request for a ride to the event "' . $this->ride->event->title . '" has been rejected by the driver.')
-            ->line('We are so sorry 😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭')
+            ->subject('Information about your event attendance request')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line('Unfortunately, your request to attend the event "' . $this->event->title . '" has been rejected by the organizer.')
+            ->when($this->eventAttendee->message, function ($message) {
+                return $message->line('Organizer\'s note: ' . $this->eventAttendee->message);
+            })
+            ->line('Don\'t worry - there are many other interesting events waiting for you!')
+            ->action('Browse other events', url('/events'))
             ->salutation('Have a great day!')
             ->salutation('Team Faily');
-
     }
 }

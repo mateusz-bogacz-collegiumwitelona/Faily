@@ -9,7 +9,7 @@ import { createI18n} from "vue-i18n";
 import LeafletMap from './components/LeafletMap.vue';
 import MainMap from './components/MainMap.vue';
 import 'leaflet/dist/leaflet.css';
-import EventForm from "./components/EventForm.vue";
+import EventForm from "./components/EventForm.vue";``
 
 import pl from './i18n/pl.json'
 import en from './i18n/en.json'

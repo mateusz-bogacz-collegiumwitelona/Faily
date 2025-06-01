@@ -48,7 +48,8 @@ return [
         'adminDashboard' => 'Admin Panel',
         'usersReports' => 'User Reports',
         'usersMenagement' => 'User Management',
-        'attendeesList' => 'Attendees List'
+        'attendeesList' => 'Attendees List',
+        'myApplications' => 'My Applications - Faily',
     ],
 
     'navbar' => [
@@ -64,6 +65,7 @@ return [
         'signOut' => 'Logout',
         'signIn' => 'Login',
         "admin" => "Administrator",
+        'myApplications' => 'My Applications',
     ],
     'profilemenu' => [
         'myAccount' => 'My Account',
@@ -663,5 +665,28 @@ return [
 
     'reportusermodal' => [
         'successReport' => 'Report User',
+    ],
+
+    'myapplications' => [
+        'myApplications' => 'My Applications',
+        'eventApplications' => 'Applications for Events',
+        'rideApplications' => 'Applications for Rides',
+        'date' => 'Date:',
+        'location' => 'Location:',
+        'organizer' => 'Organizer:',
+        'driver' => 'Driver:',
+        'vehicle' => 'Vehicle:',
+        'meetingPoint' => 'Meeting point:',
+        'accepted' => 'Accepted',
+        'rejected' => 'Rejected',
+        'pending' => 'Expects',
+        'attendeesCount' => 'Number of participants:',
+        'message' => 'Message:',
+        'appliedOn' => 'Reported:',
+        'viewEvent' => 'View Event',
+        'cancelApplication' => 'Cancel Application',
+        'cancelConfirm' => 'Are you sure you want to cancel this application?',
+        'noEventApplications' => 'You don\'t  have any submissions for events.',
+        'noRideApplications' => 'You don\'t  have any requests for rides.',
     ],
 ];

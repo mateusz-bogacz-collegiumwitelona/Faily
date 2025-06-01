@@ -45,7 +45,8 @@ abstract class BaseRepository implements RepositoryInterface
     public function update($id, array $data)
     {
         $record = $this->model->find($id);
-        return $record->update($data);
+        $record->update($data);
+        return $record->fresh();
     }
 
     public function delete($id)

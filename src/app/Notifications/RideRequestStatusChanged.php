@@ -6,8 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\RideRequest;
 use App\Models\Ride;
+use App\Models\RideRequest;
 
 class RideRequestStatusChanged extends Notification implements ShouldQueue
 {
@@ -15,7 +15,6 @@ class RideRequestStatusChanged extends Notification implements ShouldQueue
 
     protected $rideRequest;
     protected $ride;
-    protected $driver;
 
     /**
      * Create a new notification instance.
@@ -24,7 +23,6 @@ class RideRequestStatusChanged extends Notification implements ShouldQueue
     {
         $this->rideRequest = $rideRequest;
         $this->ride = $ride;
-        $this->driver = $ride->driver;
     }
 
     /**
@@ -32,55 +30,21 @@ class RideRequestStatusChanged extends Notification implements ShouldQueue
      *
      * @return array<int, string>
      */
-    public function via($notifiable)
+    public function via(object $notifiable): array
     {
-        return $notifiable->email_notifications ? ['mail'] : [];
+        return ['mail'];
     }
 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail($notifiable)
+    public function toMail(object $notifiable): MailMessage
     {
         if ($this->rideRequest->status === 'accepted') {
             return $this->buildAcceptedEmail($notifiable);
         } else {
             return $this->buildRejectedEmail($notifiable);
         }
-    }
-
-    protected function buildAcceptedEmail($notifiable)
-    {
-        return (new MailMessage)
-            ->subject('Your request for a ride has been accepted!')
-            ->greeting('Hello ' . $notifiable->name . ' sir!')
-            ->line('Your request for a ride to the event "' . $this->ride->event->title . '" has been accepted by the driver ' . $this->driver->name . '.')
-            ->line('Details of the ride:')
-            ->line('• Date: ' . $this->ride->event->date->format('d.m.Y H:i'))
-            ->line('• Meeting place: ' . $this->ride->meeting_location_name)
-            ->line('• Vechicle: ' . $this->ride->vehicle_description)
-            ->when($this->driver->phone && !empty(trim($this->driver->phone)), function ($message) {
-                return $message->line('• Driver contact: ' . $this->driver->phone);
-            })
-            ->action('See event details', url('/events/' . $this->ride->event_id))
-            ->line('We remind you to be punctual and inform the driver of any changes in plans.')
-            ->salutation('Thank you for using our application!')
-            ->salutation('Team Faily');
-    }
-
-
-    /**
-     * Get the mail representation of the notification.
-     */
-    protected function buildRejectedEmail($notifiable)
-    {
-        return (new MailMessage)
-            ->subject('Information about your transit request')
-            ->greeting('Hello ' . $notifiable->name . 'sir!')
-            ->line('Unfortunately, your request for a ride to the event "' . $this->ride->event->title . '" has been rejected.')
-            ->line('We are so sorry 😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭😭')
-            ->line('Have a great day!')
-            ->line('Team Faily');
     }
 
     /**
@@ -91,7 +55,46 @@ class RideRequestStatusChanged extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'ride_request_id' => $this->rideRequest->id,
+            'ride_id' => $this->ride->id,
+            'status' => $this->rideRequest->status,
+            'event_id' => $this->ride->event_id,
+            'event_title' => $this->ride->event ? $this->ride->event->title : null,
+            'driver_name' => $this->ride->driver ? $this->ride->driver->name : null,
         ];
+    }
+
+    protected function buildAcceptedEmail($notifiable)
+    {
+        return (new MailMessage)
+            ->subject('Your ride request has been approved!')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line('Great news! Your request for a ride to the event "' . ($this->ride->event ? $this->ride->event->title : 'Unknown event') . '" has been accepted by the driver ' . ($this->ride->driver ? $this->ride->driver->name : 'Unknown driver') . '.')
+            ->line('Ride details:')
+            ->line('• Event date: ' . ($this->ride->event ? $this->ride->event->date->format('d.m.Y H:i') : 'Unknown date'))
+            ->line('• Meeting place: ' . $this->ride->meeting_location_name)
+            ->line('• Vehicle: ' . $this->ride->vehicle_description)
+            ->when($this->ride->driver && $this->ride->driver->phone, function ($message) {
+                return $message->line('• Driver contact: ' . $this->ride->driver->phone);
+            })
+            ->action('View event details', url('/events/' . $this->ride->event_id))
+            ->line('Please be punctual and inform the driver of any changes in your plans.')
+            ->salutation('Have a great trip!')
+            ->salutation('Team Faily');
+    }
+
+    protected function buildRejectedEmail($notifiable)
+    {
+        return (new MailMessage)
+            ->subject('Information about your ride request')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line('Unfortunately, your request for a ride to the event "' . ($this->ride->event ? $this->ride->event->title : 'Unknown event') . '" has been rejected by the driver.')
+            ->when($this->rideRequest->message, function ($message) {
+                return $message->line('Your message was: ' . $this->rideRequest->message);
+            })
+            ->line('Don\'t worry - you can look for other rides or create your own!')
+            ->action('Browse other rides', url('/events/' . $this->ride->event_id))
+            ->salutation('Have a great day!')
+            ->salutation('Team Faily');
     }
 }

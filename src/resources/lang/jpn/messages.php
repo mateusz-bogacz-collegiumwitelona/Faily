@@ -49,7 +49,8 @@ return [
         'usersMenagement' => 'ユーザー管理',
         'ridesEdit' => 'ライドの詳細を編集する',
         'ridesCreate' => '新しい乗り物を追加する',
-        'attendeesList' => 'アプリケーションのリスト'
+        'attendeesList' => 'アプリケーションのリスト',
+        'myApplications' => '私のアプリケーション - Faily',
     ],
 
     'navbar' => [
@@ -65,6 +66,7 @@ return [
         'signOut' => 'サインアウト',
         'signIn' => 'サインイン',
         "admin" => "管理者",
+        'myApplications' => '私のアプリケーション',
     ],
     'profilemenu' => [
         'myAccount' => 'マイアカウント',
@@ -646,5 +648,28 @@ return [
         'message2' => '間違いだと思われる方は、管理人までご連絡ください：',
         'veryFunnyLink' => 'をクリックしてください。',
         'logout' => 'ログアウト',
+    ],
+
+    'myapplications' => [
+        'myApplications' => '私のアプリケーション',
+        'eventApplications' => 'イベント申込',
+        'rideApplications' => '乗車申し込み',
+        'date' => '日付:',
+        'location' => '所在地:',
+        'organizer' => 'オーガナイザー:',
+        'driver' => 'ドライバー:',
+        'vehicle' => '車両:',
+        'meetingPoint' => '集合場所:',
+        'accepted' => '受諾',
+        'rejected' => '不採用',
+        'pending' => '期待',
+        'attendeesCount' => '参加者数:',
+        'message' => 'メッセージ:',
+        'appliedOn' => '報告済み:',
+        'viewEvent' => 'イベントを見る',
+        'cancelApplication' => '申し込みのキャンセル',
+        'cancelConfirm' => '本当にキャンセルしますか?',
+        'noEventApplications' => 'イベントへの応募がありません.',
+        'noRideApplications' => 'ライドに関する投稿がありません。.',
     ],
 ];

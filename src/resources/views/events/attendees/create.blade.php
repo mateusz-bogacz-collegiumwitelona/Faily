@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +36,7 @@
 
                         <div class="mb-4">
                             <label for="message" class="form-label">{{ __('messages.eventattendeescreate.messageToOrganizerLabel') }}</label>
-                            <textarea class="form-control text-color" id="message" name="message" rows="3"></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                         </div>
 
                         <div class="d-grid">

@@ -49,7 +49,8 @@ return [
         'usersMenagement' => 'Управління користувачами',
         'ridesEdit' => 'Редагувати деталі поїздки',
         'ridesCreate' => 'Додати нову поїздку',
-        'attendeesList' => 'Список заявок'
+        'attendeesList' => 'Список заявок',
+        'myApplications' => 'Мої заявки - Faily',
     ],
 
     'navbar' => [
@@ -65,7 +66,9 @@ return [
         'signOut' => 'Вийти',
         'signIn' => 'Увійти',
         "admin" => "адмін",
+        'myApplications' => 'Мої заявки',
     ],
+
     'profilemenu' => [
         'myAccount' => 'Мій акаунт',
         'dashboard' => 'Підсумок',
@@ -643,6 +646,29 @@ return [
         'message2' => 'Якщо ви вважаєте, що це помилка, будь ласка, звяжіться з адміністратором:',
         'veryFunnyLink' => 'Будь ласка, натисніть',
         'logout' => 'Вийдіть з системи',
+    ],
+
+    'myapplications' => [
+        'myApplications' => 'Мої заявки',
+        'eventApplications' => 'Заявки на проведення заходів',
+        'rideApplications' => 'Заявки на атракціони',
+        'date' => 'Дата:',
+        'location' => 'Місцезнаходження:',
+        'organizer' => 'Організатор:',
+        'driver' => 'Водій:',
+        'vehicle' => 'Транспортний засіб:',
+        'meetingPoint' => 'Місце зустрічі:',
+        'accepted' => 'Прийнято',
+        'rejected' => 'Відхилено',
+        'pending' => 'Очікування',
+        'attendeesCount' => 'Кількість учасників:',
+        'message' => 'Повідомлення:',
+        'appliedOn' => 'Повідомляється:',
+        'viewEvent' => 'Переглянути подію',
+        'cancelApplication' => 'Скасувати заявку',
+        'cancelConfirm' => 'Ви впевнені, що хочете скасувати цю заявку?',
+        'noEventApplications' => 'У вас немає заявок на події.',
+        'noRideApplications' => 'У вас немає запитів на поїздки.',
     ],
 ];
 

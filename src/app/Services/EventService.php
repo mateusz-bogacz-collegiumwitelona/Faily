@@ -147,7 +147,7 @@ class EventService extends BaseService implements EventServiceInterface
 
         unset($data['photos']);
 
-        $event = $this->repository->update($data, $eventId);
+        $event = $this->repository->update($eventId, $data);
 
         if ($this->useCache()) {
             $this->cacheService->forget("{$this->cachePrefix}.{$eventId}");

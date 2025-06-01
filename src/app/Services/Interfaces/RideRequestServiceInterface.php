@@ -12,4 +12,5 @@ interface RideRequestServiceInterface extends ServiceInterface
     public function createRequest(array $data, $userId);
     public function updateRequestStatus(RideRequest $rideRequest, $status, $userId);
     public function cancelRequest(RideRequest $rideRequest, $userId);
+    public function getUserRideRequests($userId);
 }

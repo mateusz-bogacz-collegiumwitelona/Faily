@@ -50,7 +50,7 @@
                     </div>
                     <div class="text-center mt-5">
                         <h3 class="mb-3">{{ __('messages.help.needHelp') }}</h3>
-                        <a href="mailto:support@faily.pl" class="btn btn-gradient border-0 px-4 py-2 fw-semibold text-color_2">
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-gradient border-0 px-4 py-2 fw-semibold text-color_2">
                             {{ __('messages.help.email') }}
                         </a>
                     </div>

@@ -6,7 +6,7 @@ use App\Repositories\Interfaces\ReportRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\Interfaces\CacheServiceInterface;
 use App\Services\Interfaces\ReportServiceInterface;
-use App\Models\Report;
+use App\Notifications\UserBanned;
 use Illuminate\Http\Request;
 
 
@@ -71,32 +71,7 @@ class ReportService extends BaseService implements ReportServiceInterface
         $report = $this->reportRepository->find($id);
 
         if (!$report) {
-            throw new \Exception('Notification does not exist.');
-        }
-
-        $this->reportRepository->updateStatus($id, 'reviewed');
-
-        $user = $this->userRepository->incrementReportCount($report->reported_user_id);
-
-        if ($user->reports_count >= 3 && $user->status !== 'banned' && $user->role !== 'admin') {
-            $this->userRepository->updateStatus($user->id, 'banned');
-        }
-
-        if ($this->useCache()) {
-            $this->cacheService->forget("{$this->cachePrefix}.pending.count");
-            $this->cacheService->forget("user.{$report->reported_user_id}");
-            $this->cacheService->forget("user.banned.count");
-            $this->cacheService->flushTags(['reports', 'users']);
-        }
-        return $report;
-    }
-
-    public function rejectReport($id)
-    {
-        $report = $this->reportRepository->find($id);
-
-        if (!$report) {
-            throw new \Exception('Notification does not exist.');
+            throw new \Exception('Report does not exist.');
         }
 
         $this->reportRepository->updateStatus($id, 'reviewed');
@@ -104,16 +79,11 @@ class ReportService extends BaseService implements ReportServiceInterface
         $user = $this->userRepository->incrementReportCount($report->reported_user_id);
         $userWasBanned = false;
 
-        if ($user->reports_count >= 3 &&
-            $user->status !== 'banned' &&
-            $user->role !== 'admin')
-        {
+        if ($user->reports_count >= 3 && $user->status !== 'banned' && $user->role !== 'admin') {
             $this->userRepository->updateStatus($user->id, 'banned');
             $userWasBanned = true;
 
-            if ($user->email) {
-                $this->sendBanNotification($user, $report->reason);
-            }
+            $user->notify(new UserBanned($user, $report));
         }
 
         if ($this->useCache()) {
@@ -126,6 +96,30 @@ class ReportService extends BaseService implements ReportServiceInterface
         return [
             'report' => $report,
             'user_banned' => $userWasBanned
+        ];
+    }
+
+
+    public function rejectReport($id)
+    {
+        $report = $this->reportRepository->find($id);
+
+        if (!$report) {
+            throw new \Exception('Report does not exist.');
+        }
+
+        $this->reportRepository->updateStatus($id, 'reviewed');
+
+        if ($this->useCache()) {
+            $this->cacheService->forget("{$this->cachePrefix}.pending.count");
+            $this->cacheService->forget("user.{$report->reported_user_id}");
+            $this->cacheService->forget("user.banned.count");
+            $this->cacheService->flushTags(['reports', 'users']);
+        }
+
+        return [
+            'report' => $report,
+            'user_banned' => false
         ];
     }
 
@@ -148,12 +142,4 @@ class ReportService extends BaseService implements ReportServiceInterface
         return $this->repository->findPending();
     }
 
-    protected function sendBanNotification($user, $reason = null)
-    {
-        try {
-            Mail::to($user->email)->send(new UserBanned($user, $reason));
-        } catch (\Exception $e) {
-            \Log::error('Failed to send ban notification email: ' . $e->getMessage());
-        }
-    }
 }

@@ -16,49 +16,62 @@ class EventReminderNotification extends Notification implements ShouldQueue
     protected $event;
     protected $ride;
 
-    public function __construct(Event $event, Ride $ride = null)
+    public function __construct(Event $event, ?Ride $ride = null)
     {
         $this->event = $event;
         $this->ride = $ride;
     }
 
-
-    public function via($notifiable)
+    public function via(object $notifiable): array
     {
         return ['mail'];
     }
 
-    public function toMail($notifiable)
+    public function toMail(object $notifiable): MailMessage
     {
         $mailMessage = (new MailMessage)
             ->subject('Reminder of the event: ' . $this->event->title)
-            ->greeting('Hello ' . $notifiable->name . ' sir!')
+            ->greeting('Hello ' . $notifiable->name . '!')
             ->line('A reminder that the event you signed up for will be held tomorrow:')
-            ->line('**' . $this->event->title . '**')
-            ->line('**Date:** ' . $this->event->date->format('d.m.Y H:i'))
-            ->line('**Location:** ' . $this->event->location_name);
+            ->line('Event: ' . $this->event->title)
+            ->line('Date: ' . $this->event->date->format('d.m.Y H:i'))
+            ->line('Location: ' . $this->event->location_name);
 
         if ($this->ride) {
-            $mailMessage
-                ->line('**Information about the ride:**')
-                ->line('**Vehicle:** ' . $this->ride->vehicle_description)
-                ->line('**Meeting Location:** ' . $this->ride->meeting_location_name)
-                ->line('**Driver:** ' . $this->ride->driver->name);
+            $mailMessage->line('Information about the ride:');
+
+            if ($this->ride->vehicle_description) {
+                $mailMessage->line('Vehicle: ' . $this->ride->vehicle_description);
+            }
+
+            if ($this->ride->meeting_location_name) {
+                $mailMessage->line('Meeting Location: ' . $this->ride->meeting_location_name);
+            }
+
+            if ($this->ride->driver) {
+                $mailMessage->line('Driver: ' . $this->ride->driver->name);
+
+                if ($this->ride->driver->phone) {
+                    $mailMessage->line('Driver contact: ' . $this->ride->driver->phone);
+                }
+            }
         }
 
         return $mailMessage
             ->line("Can't take part? Remember to cancel your registration.")
             ->action('View event details', url('/events/' . $this->event->id))
-            ->salutation('Team Faily,');
+            ->salutation('Best regards,')
+            ->salutation('Team Faily');
     }
 
-    public function toArray($notifiable)
+    public function toArray(object $notifiable): array
     {
         return [
             'event_id' => $this->event->id,
             'event_title' => $this->event->title,
-            'event_date' => $this->event->date,
-            'ride_id' => $this->ride ? $this->ride->id : null,
+            'event_date' => $this->event->date->toISOString(),
+            'ride_id' => $this->ride?->id,
+            'has_ride' => !is_null($this->ride),
         ];
     }
 }

@@ -128,6 +128,16 @@ export default {
                 popupAnchor: [0, -40]
             });
         },
+
+        initializeCustomIcon2() {
+            this.customIcon = L.icon({
+                iconUrl: '/images/includes/location_11111111111.png',
+                iconSize: [40, 40],
+                iconAnchor: [20, 40],
+                popupAnchor: [0, -40]
+            });
+        },
+
         addMarker(lat, lng, popupContent) {
             if (this.currentMarker) {
                 this.map.removeLayer(this.currentMarker);
@@ -369,6 +379,8 @@ export default {
                 this.showSearchResults = false;
             }
         }
+
+
     }
 };
 </script>

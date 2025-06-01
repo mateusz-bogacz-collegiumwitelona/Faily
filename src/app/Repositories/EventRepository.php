@@ -46,7 +46,12 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
         }
 
         if (isset($filters['has_available_spots']) && !empty($filters['has_available_spots'])) {
-            $query->whereRaw('people_count > (SELECT COALESCE(SUM(attendees_count), 0) FROM event_attendees WHERE event_attendees.event_id = events.id AND status = "accepted")');
+            $query->where('people_count', '>', function($subQuery) {
+                $subQuery->selectRaw('COALESCE(SUM(attendees_count), 0)')
+                    ->from('event_attendees')
+                    ->whereRaw('event_attendees.event_id = events.id')
+                    ->where('status', 'accepted');
+            });
         }
 
         return $query->latest()->paginate($perPage);

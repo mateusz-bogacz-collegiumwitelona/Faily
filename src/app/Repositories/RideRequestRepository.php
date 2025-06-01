@@ -40,4 +40,13 @@ class RideRequestRepository extends BaseRepository implements RideRequestReposit
         $request->load(['ride.driver', 'ride.event', 'passenger']);
         return $request;
     }
+
+    public function getUserRideRequests($userId, $perPage = 10)
+    {
+        return $this->model
+            ->with(['ride.event.photos', 'ride.driver'])
+            ->where('passenger_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
+    }
 }

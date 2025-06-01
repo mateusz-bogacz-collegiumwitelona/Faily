@@ -12,10 +12,10 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BannedController;
+use App\Http\Controllers\UserAttendancesController;
+
 
 Route::get('language/{locale}', [LanguageController::class, 'changeLanguage'])->name('language.change')->middleware(['locale']);
-Route::post('/toggle-theme', [ThemeController::class, 'toggleTheme'])->name('toggle.theme');
-Route::get('/get-theme', [ThemeController::class, 'getTheme'])->name('get.theme');
 
 Route::get('/', function () {return view('welcome');})->name('welcome')->middleware('locale');
 
@@ -30,6 +30,8 @@ Route::middleware(['auth', 'verified', 'locale'])->group(function ()
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile/photo', [ProfileController::class, 'editPhoto'])->name('profile.edit-photo');
     Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.update-photo');
+
+    Route::get('/user/{user}', [ProfileController::class, 'showUserProfile'])->name('user.profile');
 
     Route::get('/events/feed', [EventController::class, 'feed'])->name('events.feed');
 
@@ -58,6 +60,9 @@ Route::middleware(['auth', 'verified', 'locale'])->group(function ()
     Route::get('/map', [MainMapController::class, 'showMap']);
     Route::get('/help', function () {return view('help');});
     Route::get('/my-attendances', [UserAttendancesController::class, 'index'])->name('user.attendances');
+
+
+    Route::get('/my-applications', [EventAttendeeController::class, 'myApplications'])->name('my-applications');
 
 
 });

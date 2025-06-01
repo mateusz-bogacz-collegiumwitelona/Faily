@@ -108,16 +108,24 @@
                                     <tr class="border-top border-secondary">
                                         <td class="py-3 px-4">
                                             <div class="d-flex align-items-center">
-                                                @if($ride->driver->photo_path)
-                                                    <img src="{{ asset('storage/' . $ride->driver->photo_path) }}"
-                                                         class="rounded-circle border border-2 border-light"
-                                                         alt="{{ __('messages.eventlist.profilePhotoLabel') }}" width="70" height="70" style="object-fit: cover;">
-                                                @else
-                                                    <img src="{{ asset('images/includes/default-avatar.png') }}"
-                                                         class="rounded-circle border border-2 border-light"
-                                                         alt="{{ __('messages.eventlist.profilePhotoLabel') }}" width="70" height="70" style="object-fit: cover;">
-                                                @endif
-                                                <span class="fw-bold">{{ $ride->driver->name }}</span>
+                                                <a href="{{ route('user.profile', $ride->driver) }}" class="text-decoration-none">
+                                                    @if($ride->driver->photo_path)
+                                                        <img src="{{ asset('storage/' . $ride->driver->photo_path) }}"
+                                                             class="rounded-circle border border-2 border-light hover-lift"
+                                                             alt="{{ __('messages.eventlist.profilePhotoLabel') }}"
+                                                             width="70" height="70"
+                                                             style="object-fit: cover; transition: transform 0.2s ease;">
+                                                    @else
+                                                        <img src="{{ asset('images/includes/default-avatar.png') }}"
+                                                             class="rounded-circle border border-2 border-light hover-lift"
+                                                             alt="{{ __('messages.eventlist.profilePhotoLabel') }}"
+                                                             width="70" height="70"
+                                                             style="object-fit: cover; transition: transform 0.2s ease;">
+                                                    @endif
+                                                </a>
+                                                <a href="{{ route('user.profile', $ride->driver) }}" class="text-decoration-none ms-3">
+                                                    <span class="fw-bold text-color_2 hover-underline">{{ $ride->driver->name }}</span>
+                                                </a>
                                             </div>
                                         </td>
                                         <td class="py-3 px-4">
@@ -337,29 +345,38 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        @if($event->user->photo_path)
-                            <img src="{{ asset('storage/' . $event->user->photo_path) }}"
-                                 class="rounded-circle me-3 border border-2 border-light" alt="{{ __('messages.showevent.profilePhoto') }}" width="80" height="80">
-                        @else
-                            <img src="{{ asset('images/includes/default-avatar.png') }}"
-                                 class="rounded-circle me-3 border border-2 border-light" alt="{{ __('messages.showevent.profilePhoto') }}" width="80" height="80">
-                        @endif
+                        <a href="{{ route('user.profile', $event->user) }}" class="text-decoration-none">
+                            @if($event->user->photo_path)
+                                <img src="{{ asset('storage/' . $event->user->photo_path) }}"
+                                     class="rounded-circle me-3 border border-2 border-light hover-lift"
+                                     alt="{{ __('messages.showevent.profilePhoto') }}"
+                                     width="80" height="80"
+                                     style="object-fit: cover; transition: transform 0.2s ease;">
+                            @else
+                                <img src="{{ asset('images/includes/default-avatar.png') }}"
+                                     class="rounded-circle me-3 border border-2 border-light hover-lift"
+                                     alt="{{ __('messages.showevent.profilePhoto') }}"
+                                     width="80" height="80"
+                                     style="object-fit: cover; transition: transform 0.2s ease;">
+                            @endif
+                        </a>
                         <div>
-                            <h5 class="mb-1 fw-bold">{{ $event->user->name }}</h5>
+                            <a href="{{ route('user.profile', $event->user) }}" class="text-decoration-none">
+                                <h5 class="mb-1 fw-bold text-color_2 hover-underline">{{ $event->user->name }}</h5>
+                            </a>
                             @if($event->user->description)
                                 <p class="mb-0 small text-color">{{ $event->user->description }}</p>
                             @endif
                         </div>
-
                     </div>
                 </div>
-                    @auth
-                        <div class="card-footer text-danger">
+                @auth
+                    <div class="card-footer text-danger">
                         @if(Auth::id() !== $event->user_id && $event->user->role !== 'admin')
                             @include('includes.report-user-modal', ['userId' => $event->user->id, 'userName' => $event->user->name])
                         @endif
-                        </div>
-                    @endauth
+                    </div>
+                @endauth
             </div>
 
         </div>

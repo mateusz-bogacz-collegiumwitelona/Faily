@@ -10,4 +10,6 @@ interface RideRequestRepositoryInterface extends RepositoryInterface
     public function hasUserRequested($rideId, $userId);
     public function countAcceptedRequests($rideId);
     public function getRequestWithRelations($requestId);
+    public function getUserRideRequests($userId, $perPage = 10);
+
 }

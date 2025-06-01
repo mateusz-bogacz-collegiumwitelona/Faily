@@ -9,8 +9,7 @@ use App\Repositories\Interfaces\EventAttendeeRepositoryInterface;
 use App\Repositories\Interfaces\EventRepositoryInterface;
 use App\Services\Interfaces\CacheServiceInterface;
 use App\Services\Interfaces\EventAttendeeServiceInterface;
-use Illuminate\Database\Eloquent\Collection;
-use Spatie\Activitylog\Facades\Activity;
+use App\Services\Interfaces\RideRequestServiceInterface;
 
 class EventAttendeeService extends BaseService implements EventAttendeeServiceInterface
 {
@@ -24,11 +23,13 @@ class EventAttendeeService extends BaseService implements EventAttendeeServiceIn
     public function __construct(
         EventAttendeeRepositoryInterface $repository,
         EventRepositoryInterface $eventRepository,
+        RideRequestServiceInterface $rideRequestService = null,
         ?CacheServiceInterface $cacheService = null
     ) {
         parent::__construct($repository, $cacheService);
 
         $this->eventRepository = $eventRepository;
+        $this->rideRequestService = $rideRequestService;
 
         $this->cacheTags = ['event_attendees', 'events'];
         $this->cachePrefix = 'event_attendee';
@@ -185,5 +186,29 @@ class EventAttendeeService extends BaseService implements EventAttendeeServiceIn
             },
             $this->cacheTimes['all']
         );
+    }
+
+    public function getUserApplicationsData($userId)
+    {
+        // Pobierz zgłoszenia na wydarzenia
+        $eventAttendees = $this->getUserAttendances($userId);
+
+        // Pobierz zgłoszenia na przejazdy (jeśli service jest dostępny)
+        $rideRequests = collect(); // Pusty collection jako fallback
+
+        if ($this->rideRequestService) {
+            try {
+                $rideRequests = $this->rideRequestService->getUserRideRequests($userId);
+            } catch (\Exception $e) {
+                // W przypadku błędu, pozostaw pusty collection
+                \Log::warning('Failed to fetch ride requests for user: ' . $userId, ['error' => $e->getMessage()]);
+                $rideRequests = collect();
+            }
+        }
+
+        return [
+            'eventAttendees' => $eventAttendees,
+            'rideRequests' => $rideRequests
+        ];
     }
 }

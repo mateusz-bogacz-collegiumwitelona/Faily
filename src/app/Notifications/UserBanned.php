@@ -25,7 +25,6 @@ class UserBanned extends Notification implements ShouldQueue
         $this->lastReport = $lastReport;
     }
 
-
     /**
      * Get the notification's delivery channels.
      *
@@ -42,20 +41,21 @@ class UserBanned extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         $mailMessage = (new MailMessage)
-            ->subject('You has been banned')
-            ->greeting('Hello ' . $notifiable->name . ' sir!')
-            ->line('We regret to inform you that your account has been blocked due to violation of community rules.')
-            ->line('Your account has received too many notifications from other users.');
+            ->subject('Your account has been suspended')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line('We regret to inform you that your account has been suspended due to violation of community guidelines.')
+            ->line('Your account has received multiple reports from other users.');
 
         if ($this->lastReport && $this->lastReport->reason) {
-            $mailMessage->line('The last notification included the following reason:')
-                ->line('**' . $this->lastReport->reason . '**');
+            $mailMessage->line('The most recent report included the following reason:')
+                ->line('Reason: ' . $this->lastReport->reason);
         }
 
         return $mailMessage
-            ->line('If you have any questions, please don\'t hesitate to contact us.')
-            ->line('We have no channel of contact yet.')
-            ->salutation('Salam Alejkum 👳')
+            ->line('If you believe this action was taken in error, please contact our support team.')
+            ->line('You can reach us at: whatever')
+            ->line('We will review your case and respond within 48 hours.')
+            ->salutation('Best regards,')
             ->salutation('Team Faily');
     }
 
@@ -70,6 +70,7 @@ class UserBanned extends Notification implements ShouldQueue
             'user_id' => $this->user->id,
             'report_id' => $this->lastReport ? $this->lastReport->id : null,
             'banned_at' => now()->toDateTimeString(),
+            'reason' => $this->lastReport ? $this->lastReport->reason : null,
         ];
     }
 }

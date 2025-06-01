@@ -19,4 +19,6 @@ interface EventAttendeeServiceInterface extends ServiceInterface
     public function cancelAttendance(Event $event, EventAttendee $attendee,  $userId);
     public function getUserAttendances($userId);
 
+    public function getUserApplicationsData($userId);
+
 }

@@ -47,7 +47,8 @@ return [
         'rideDetails'=>'Información sobre la cabalgata',
         'ridesEdit' => 'Editar detalles del viaje',
         'ridesCreate' => 'Añadir nuevo viaje',
-        'attendeesList' => 'Lista de aplicaciones'
+        'attendeesList' => 'Lista de aplicaciones',
+        'myApplications' => 'Mis aplicaciones - Faily',
     ],
 
     'navbar' => [
@@ -63,6 +64,7 @@ return [
         'signOut' => 'Cerrar sesión',
         'signIn' => 'Iniciar sesión',
         "admin" => "Administrador",
+        'myApplications' => 'Mis aplicaciones',
     ],
     'profilemenu' => [
         'myAccount' => 'Mi cuenta',
@@ -644,5 +646,28 @@ return [
         'message2' => 'Si cree que se trata de un error, póngase en contacto con el administrador:',
         'veryFunnyLink' => 'Haga clic en',
         'logout' => 'Cerrar sesión',
+    ],
+
+    'myapplications' => [
+        'myApplications' => 'Mis aplicaciones',
+        'eventApplications' => 'Solicitudes de eventos',
+        'rideApplications' => 'Solicitudes de viajes',
+        'date' => 'Fecha:',
+        'location' => 'Location:',
+        'organizer' => 'Organizador:',
+        'driver' => 'Conductor:',
+        'vehicle' => 'Vehículo:',
+        'meetingPoint' => 'Punto de encuentro:',
+        'accepted' => 'Aceptado',
+        'rejected' => 'Rechazado',
+        'pending' => 'Espera',
+        'attendeesCount' => 'Número de participantes:',
+        'message' => 'Mensaje:',
+        'appliedOn' => 'Reportado:',
+        'viewEvent' => 'Ver evento',
+        'cancelApplication' => 'Cancelar notificación',
+        'cancelConfirm' => '¿Está seguro de que desea cancelar esta solicitud?',
+        'noEventApplications' => 'No tiene ninguna propuesta para eventos.',
+        'noRideApplications' => 'Usted no tiene ninguna solicitud de paseos.',
     ],
 ];
