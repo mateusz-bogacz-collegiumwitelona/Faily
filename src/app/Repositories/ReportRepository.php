@@ -17,7 +17,7 @@ class ReportRepository extends BaseRepository implements ReportRepositoryInterfa
         return $this->model::where('status', 'pending')
             ->with(['reporter', 'reportedUser'])
             ->latest()
-            ->paginate(15);
+            ->paginate(9);
     }
 
     public function findByUserAndStatus($reporterId, $reportedUserId, $status)

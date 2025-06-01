@@ -53,19 +53,16 @@
                 <div class="row justify-content-center mb-4">
                     <div class="col-4 col-md-2">
                         <button class="btn btn-gradient w-100 py-3" onclick="showInfo('people')">
-                            <i class="bi bi-people-fill fs-3"></i>
                             <div class="small mt-2">{{ __('messages.welcome.explore') }}</div>
                         </button>
                     </div>
                     <div class="col-4 col-md-2">
                         <button class="btn btn-gradient w-100 py-3" onclick="showInfo('calendar')">
-                            <i class="bi bi-calendar-plus-fill fs-3"></i>
                             <div class="small mt-2">{{ __('messages.welcome.events') }}</div>
                         </button>
                     </div>
                     <div class="col-4 col-md-2">
                         <button class="btn btn-gradient w-100 py-3" onclick="showInfo('car')">
-                            <i class="bi bi-car-front-fill fs-3"></i>
                             <div class="small mt-2">{{ __('messages.welcome.rides') }}</div>
                         </button>
                     </div>

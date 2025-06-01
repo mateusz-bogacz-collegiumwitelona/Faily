@@ -1,4 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 html, body
 {
@@ -537,22 +539,6 @@ html, body
 .page-link {
     color: #8B5CF6 !important;
 }
-.form-check-input {
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    background-image: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    border: 2px solid rgb(138,43,226) !important;
-    width: 2rem;
-    height: 1rem;
-    background-color: whitesmoke !important;
-    border-radius: 1rem;
-    position: relative;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
 .lift-card {
     border: none;
     border-radius: 10px;
@@ -563,39 +549,80 @@ html, body
     transform: translateY(-1rem);
     box-shadow: 0 10px 15px rgba(0, 0, 0, 1);
 }
-.form-check-input:focus,
-.form-check-input:focus-visible,
-.form-check-input:focus-within {
+/** Chimkowe suwaki do filtrów */
+.chimkowy-switch {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: none !important;
     outline: none !important;
     box-shadow: none !important;
-    border-color: rgb(138,43,226) !important;
+    border: 2px solid rgb(138, 43, 226) !important;
+    width: 2rem;
+    height: 1rem;
+    background-color: whitesmoke !important;
+    border-radius: 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.form-check-input::before {
+.chimkowy-switch:focus,
+.chimkowy-switch:focus-visible,
+.chimkowy-switch:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgb(138, 43, 226) !important;
+}
+
+.chimkowy-switch::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 0.125rem;
     width: 0.8rem;
     height: 0.8rem;
-    background-color: rgb(138,43,226) !important;
+    background-color: rgb(138, 43, 226) !important;
     border-radius: 50%;
     transform: translateY(-50%);
     transition: left 0.3s ease, background-color 0.3s ease;
     box-shadow: none !important;
 }
 
-.form-check-input:checked {
-    background-color: rgb(138,43,226) !important;
-    border-color: rgb(138,43,226) !important;
+.chimkowy-switch:checked {
+    background-color: rgb(138, 43, 226) !important;
+    border-color: rgb(138, 43, 226) !important;
     box-shadow: none !important;
 }
 
-.form-check-input:checked::before {
+.chimkowy-switch:checked::before {
     background-color: whitesmoke !important;
     left: calc(100% - 0.8rem - 0.125rem);
-    box-shadow: none ;
+    box-shadow: none;
 }
+
+/**Chimkowy guziczek przy login */
+.chimkowy-checkbox {
+    appearance: auto;
+    accent-color: rgb(138, 43, 226);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.chimkowy-checkbox:focus,
+.chimkowy-checkbox:focus-visible,
+.chimkowy-checkbox:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgb(138, 43, 226) !important;
+}
+
+.chimkowy-checkbox:checked {
+    background-color: rgb(138, 43, 226) !important;
+    border-color: rgb(138, 43, 226) !important;
+    box-shadow: none !important;
+}
+
 
 footer {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
@@ -621,6 +648,39 @@ main {
 }
 
 /** Mapa 2*/
+.leaflet-popup.dark-popup .leaflet-popup-content-wrapper {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 80%);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: none;
+}
+
+.leaflet-popup.dark-popup .leaflet-popup-content {
+    margin: 15px;
+    color: white;
+}
+
+.leaflet-popup.dark-popup .leaflet-popup-tip {
+    background: #16213e;
+    border: none;
+    box-shadow: none;
+}
+.dark-popup .event-popup h6,
+.dark-popup .event-popup p,
+.dark-popup .event-popup i,
+.dark-popup .event-popup strong {
+    color: white !important;
+}
+.leaflet-popup.dark-popup .leaflet-popup-close-button {
+    color: white;
+    font-size: 18px;
+    padding: 4px 8px;
+}
+
+.leaflet-popup.dark-popup .leaflet-popup-close-button:hover {
+    color: #ccc;
+}
 .map-controls, .map-info, .search-container {
     position: absolute;
     z-index: 1000;

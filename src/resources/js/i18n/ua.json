@@ -11,7 +11,8 @@
         "longitude": "Довгота:",
         "noResults": "Результатів не знайдено",
         "alertGeolocalization": "Не вдалося визначити ваше місцезнаходження",
-        "checkEvent": "Перевір"
+        "checkEvent": "Перевір",
+        "eventButton": "Перейти до події"
     },
 
     "addevent": {

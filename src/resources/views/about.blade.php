@@ -143,15 +143,37 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-center gap-3">
+                <button type="submit" class="btn-gradient-nav text-color_2" data-bs-toggle="modal" data-bs-target="#confirmUserDeletionModal">
+                    <i class="bi bi-person-arms-up"></i>
+                </button>
+            </div>
+            <div class="modal fade" id="confirmUserDeletionModal" tabindex="-1" aria-labelledby="confirmUserDeletionLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmUserDeletionLabel">{{ __('messages.developers.joke') }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <video width="100%" height="auto" autoplay controls id="modalVideo">
+                                <source src="{{ asset('video/dziwny_pomysl_wodza.mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('messages.profilepartialsdelete.closeButton') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </main>
 </div>
 @include('includes.footer')
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        
+
         document.getElementById('wodz-tab').classList.add('active');
         document.getElementById('wodz').classList.add('show', 'active');
         document.querySelectorAll('[data-bs-toggle="tab"]').forEach(button => {
@@ -193,6 +215,21 @@
                 }
             });
         });
+    });
+</script>
+<script>
+    document.getElementById('confirmUserDeletionModal').addEventListener('hidden.bs.modal', function () {
+        const video = document.getElementById('modalVideo');
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+    });
+    document.getElementById('confirmUserDeletionModal').addEventListener('shown.bs.modal', function () {
+        const video = document.getElementById('modalVideo');
+        if (video) {
+            video.play();
+        }
     });
 </script>
 </body>

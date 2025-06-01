@@ -8,40 +8,27 @@ use App\Models\Event;
 use App\Models\Ride;
 use App\Models\RideRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
 use Faker\Factory as Faker;
 
-class TestDataSeeder extends Seeder
+class SeederForProduction extends Seeder
 {
     /**
-     * To jest seeder udający factory XD
+     * Seeder do tworzenia danych testowych
      */
 
     public function run(): void
     {
         $faker = Faker::create('pl_PL');
 
-        $mainUser = User::first() ?? User::create([
-            'name' => 'Bodzio',
-            'first_name' => 'Jan',
-            'last_name' => 'Kowalski',
-            'email' => 'jan@example.com',
-            'password' => Hash::make('password'),
-            'age' => '19',
-            'phone' => '+48 777 777 777',
-            'description' => 'testowe konto',
-            'role' => 'user',
-            'status' => 'active',
-        ]);
-
-        $users = [$mainUser];
-        for ($i = 0; $i < 15; $i++) {
+        $users = [];
+        for ($i = 0; $i < 16; $i++) {
             $user = User::create([
                 'name' => $faker->userName,
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
-                'password' => Hash::make('password'),
+                'password' => Hash::make($faker->password(8, 12)),
                 'age' => $faker->numberBetween(18, 60),
                 'phone' => $faker->phoneNumber,
                 'description' => $faker->sentence(10),
@@ -51,20 +38,7 @@ class TestDataSeeder extends Seeder
             $users[] = $user;
         }
 
-        $mainEvent = Event::create([
-            'user_id' => $mainUser->id,
-            'title' => 'Koncert w Krakowie',
-            'description' => 'Świetny koncert rockowy w centrum Krakowa',
-            'date' => now()->addDays(10),
-            'latitude' => 50.0647,
-            'longitude' => 19.9450,
-            'location_name' => 'Arena Kraków',
-            'has_ride_sharing' => true,
-        ]);
 
-        if (!$mainEvent->id) {
-            throw new \Exception("Nie udało się utworzyć wydarzenia!");
-        }
 
         $cities = [
             ['name' => 'Warszawa', 'lat' => 52.229676, 'lng' => 21.012229],
@@ -79,7 +53,7 @@ class TestDataSeeder extends Seeder
             'Targi', 'Piknik', 'Warsztat', 'Spotkanie'
         ];
 
-        $events = [$mainEvent];
+        $events = [];
 
         for ($i = 0; $i < 10; $i++) {
             $city = $faker->randomElement($cities);
@@ -103,26 +77,12 @@ class TestDataSeeder extends Seeder
             $events[] = $event;
         }
 
-        $mainRide = Ride::create([
-            'event_id' => $mainEvent->id,
-            'driver_id' => $mainUser->id,
-            'vehicle_description' => 'Czerwony Volkswagen Golf',
-            'available_seats' => 3,
-            'meeting_latitude' => 50.0600,
-            'meeting_longitude' => 19.9400,
-            'meeting_location_name' => 'Stacja benzynowa BP, ul. Konopnickiej',
-        ]);
-
         $carBrands = ['Toyota', 'Ford', 'Skoda', 'Volkswagen', 'Opel', 'Honda', 'Renault', 'Peugeot'];
         $carModels = ['Corolla', 'Focus', 'Octavia', 'Golf', 'Astra', 'Civic', 'Megane', '308'];
         $carColors = ['Czerwony', 'Niebieski', 'Biały', 'Czarny', 'Srebrny', 'Zielony', 'Żółty', 'Szary'];
         $meetingPoints = ['Stacja benzynowa', 'Parking', 'Przystanek autobusowy', 'Centrum handlowe', 'Kawiarnia'];
 
         foreach ($events as $event) {
-            if ($event->id === $mainEvent->id) {
-                continue;
-            }
-
             if ($event->has_ride_sharing) {
                 $ridesCount = $faker->numberBetween(1, 3);
 

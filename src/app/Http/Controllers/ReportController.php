@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Services\Interfaces\ReportServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -12,7 +13,7 @@ class ReportController extends Controller
 
     public function __construct(ReportServiceInterface $reportService)
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth');
         $this->reportService = $reportService;
     }
 
@@ -44,6 +45,16 @@ class ReportController extends Controller
         try {
             $this->reportService->rejectReport($id);
             return redirect()->back()->with('success', 'The application was rejected.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function reportUser(Request $request, $id)
+    {
+        try {
+            $this->reportService->reportUser($request, $id, Auth::id());
+            return redirect()->back()->with('success', __('messages.reportusermodal.successReport'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

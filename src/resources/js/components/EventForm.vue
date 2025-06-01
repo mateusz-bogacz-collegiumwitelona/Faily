@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="mb-3 form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="has_ride_sharing" v-model="formData.hasRideSharing">
+                        <input class="chimkowy-switch" type="checkbox" id="has_ride_sharing" v-model="formData.hasRideSharing">
                         <label class="form-check-label" for="has_ride_sharing">{{ $t('addevent.enableCarSharing') }}</label>
                     </div>
                 </div>
@@ -153,7 +153,7 @@ export default {
     },
     setup(props) {
         const customIcon = L.icon({
-            iconUrl: '/images/includes/custom_marker.png',
+            iconUrl: '/images/includes/location_11111111111.png',
             iconSize: [40, 40],
             iconAnchor: [20, 40],
             popupAnchor: [0, -40]

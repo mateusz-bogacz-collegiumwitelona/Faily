@@ -221,13 +221,13 @@ class EventService extends BaseService implements EventServiceInterface
     public function getEventsForMap()
     {
         if (!$this->useCache()) {
-            return $this->repository->all(['title', 'description', 'latitude', 'longitude', 'location_name']);
+            return $this->repository->all(['id', 'title', 'description', 'date', 'latitude', 'longitude', 'location_name']);
         }
 
         return $this->cacheService->remember(
             "{$this->cachePrefix}.for_map",
             function () {
-                return $this->repository->all(['title', 'description', 'latitude', 'longitude', 'location_name']);
+                return $this->repository->all(['id', 'title', 'description', 'date', 'latitude', 'longitude', 'location_name']);
             },
             $this->cacheTimes['map']
         );

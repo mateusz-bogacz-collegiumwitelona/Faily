@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ __('messages.title.rideDetails') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body class="bg-main">
 @include('includes.navbar')
@@ -121,7 +120,7 @@
         }).addTo(map);
 
         const customIcon = L.icon({
-            iconUrl: '/images/includes/custom_marker.png',
+            iconUrl: '/images/includes/location_11111111111.png',
             iconSize: [40, 40],
             iconAnchor: [20, 40],
             popupAnchor: [0, -40]
@@ -135,7 +134,9 @@
                 <strong>{{ __('messages.ridesshow.meetingLocation') }}</strong><br>
                 {{ $ride->meeting_location_name }}
         </div>
-`);
+ `, {
+            className: 'dark-popup'
+        });
 
         @if(isset($ride->event->latitude) && isset($ride->event->longitude) && ($ride->event->latitude != $ride->meeting_latitude || $ride->event->longitude != $ride->meeting_longitude))
         const eventMarker = L.marker([{{ $ride->event->latitude }}, {{ $ride->event->longitude }}], {
@@ -147,7 +148,9 @@
                     <strong>{{ __('messages.ridesshow.eventLocation') }}</strong><br>
                     {{ $ride->event->location_name }}
         </div>
-`);
+`, {
+            className: 'dark-popup'
+        });
         const group = new L.featureGroup([marker, eventMarker]);
         map.fitBounds(group.getBounds().pad(0.1));
         @endif

@@ -72,6 +72,7 @@ export default {
             map: null,
             currentMarker: null,
             customIcon: null,
+            customIcon2: null,
             events: [],
             searchQuery: '',
             searchResults: [],
@@ -87,6 +88,7 @@ export default {
 
         this.initializeMap();
         this.initializeCustomIcon();
+        this.initializeCustomIcon2();
         this.addEventMarkers();
 
         setTimeout(() => {
@@ -111,7 +113,8 @@ export default {
             this.map = L.map(this.$refs.mapContainer).setView([52.069, 19.480], 7);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
+                minZoom: 5,
+                maxZoom:  15,
                 attribution: '&copy; OpenStreetMap'
             }).addTo(this.map);
             this.map.on('click', this.handleMapClick);
@@ -119,7 +122,7 @@ export default {
 
         initializeCustomIcon() {
             this.customIcon = L.icon({
-                iconUrl: '/images/includes/custom_marker.png',
+                iconUrl: '/images/includes/location_11111111111.png',
                 iconSize: [40, 40],
                 iconAnchor: [20, 40],
                 popupAnchor: [0, -40]
@@ -189,9 +192,15 @@ export default {
 
                 if (data && data.display_name && this.currentMarker) {
                     this.currentMarker.bindPopup(`
-                        <strong>${data.display_name}</strong><br>
-                        <small>${lat.toFixed(6)}, ${lng.toFixed(6)}</small>
-                    `).openPopup();
+            <div class="event-popup">
+                <h6><strong>${data.display_name}</strong></h6>
+                <p class="mb-1">
+                    <i class="bi bi-geo-alt"></i> <small>${lat.toFixed(6)}, ${lng.toFixed(6)}</small>
+                </p>
+            </div>
+                    `, {
+                        className: 'dark-popup'
+                    }).openPopup();
                 } else {
                     console.warn('No valid data returned from geocoding services');
                     this.currentMarker.bindPopup(`
@@ -213,16 +222,51 @@ export default {
             if (!this.events || !this.events.length || !this.map) return;
 
             this.events.forEach(event => {
+                console.log('Event data:', event)
+
                 const lat = parseFloat(event.latitude);
                 const lng = parseFloat(event.longitude);
                 const marker = L.marker([lat, lng], {icon: this.customIcon}).addTo(this.map);
+                let formattedDate = 'Date unavailable';
 
+                if (event.date) {
+                    try {
+                        const eventDate = new Date(event.date);
+
+                        if (!isNaN(eventDate.getTime())) {
+                            formattedDate = eventDate.toLocaleDateString('pl-PL', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+                        }
+                    } catch (error) {
+                        console.warn('Error parsing date for event:', event.title, error);
+                    }
+                }
+                const eventUrl = event.id ? `/events/${event.id}` : '#';
+                const eventButtonText = this.$t('map.eventButton');
                 marker.bindPopup(`
-            <b>${event.title}</b><br>
-            ${event.location_name ?? ''}<br>
-        `);
+            <div class="event-popup">
+                <h6><strong>${event.title}</strong></h6>
+                <p class="mb-1">
+                    <i class="bi bi-geo-alt"></i> ${event.location_name}
+                </p>
+                <p class="mb-2">
+                    <i class="bi bi-calendar"></i> ${formattedDate}
+                </p>
+                <a href="${eventUrl}" class="btn btn-gradient btn-sm" target="_blank">
+                   ${eventButtonText}
+                </a>
+            </div>
+        `, {
+                    className: 'dark-popup'
+                });
             });
         },
+
         async locateMe() {
             if (!('geolocation' in navigator)) {
                 alert(this.$t('map.alertBrowserGeolocalization'));
@@ -342,7 +386,28 @@ export default {
     height: 100%;
     position: absolute;
 }
-
+.event-popup {
+    min-width: 200px;
+    font-family: inherit;
+}
+.event-popup h6 {
+    margin-bottom: 8px;
+    color: #333;
+}
+.event-popup p {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #666;
+}
+.event-popup .btn {
+    font-size: 12px;
+    padding: 4px 8px;
+    text-decoration: none;
+}
+.event-popup i {
+    margin-right: 4px;
+    width: 14px;
+}
 @media (max-width: 768px) {
     .search-container { width: calc(100% - 120px); left: 10px; }
     .map-info { bottom: 10px; max-width: calc(100% - 20px); }

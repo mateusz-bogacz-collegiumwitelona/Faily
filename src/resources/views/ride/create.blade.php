@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ __('messages.title.ridesCreate') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
         #map {
             height: 100% !important;
@@ -134,7 +133,7 @@
         document.getElementById('meeting_longitude').value = defaultLongitude;
 
         const customIcon = L.icon({
-            iconUrl: '/images/includes/custom_marker.png',
+            iconUrl: '/images/includes/location_11111111111.png',
             iconSize: [40, 40],
             iconAnchor: [20, 40],
             popupAnchor: [0, -40],
@@ -166,7 +165,7 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Błąd reverse geocoding:', error);
+                    console.error('Reverse geocoding error:', error);
                 });
         });
 
@@ -198,7 +197,7 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Błąd wyszukiwania:', error);
+                    console.error('Search error:', error);
                 });
         }
 
@@ -216,7 +215,7 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Błąd reverse geocoding:', error);
+                    console.error('Reverse geocoding error:', error);
                 });
         });
 
@@ -227,7 +226,7 @@
 
             if (!lat || !lng || lat === '0' || lng === '0') {
                 e.preventDefault();
-                alert('Proszę wybrać lokalizację na mapie');
+                alert('Please select a location on the map');
                 return false;
             }
         });

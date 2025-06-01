@@ -24,6 +24,7 @@ class ReportService extends BaseService implements ReportServiceInterface
     {
         parent::__construct($reportRepository, $cacheService);
         $this->userRepository = $userRepository;
+        $this->reportRepository = $reportRepository;
 
         $this->cacheTags = ['reports'];
         $this->cachePrefix = 'report';
@@ -144,11 +145,9 @@ class ReportService extends BaseService implements ReportServiceInterface
     }
     public function findPending()
     {
-        return Report::where('status', 'pending')
-            ->with(['reporter', 'reportedUser'])
-            ->latest()
-            ->paginate(9);
+        return $this->repository->findPending();
     }
+
     protected function sendBanNotification($user, $reason = null)
     {
         try {

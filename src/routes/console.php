@@ -13,7 +13,7 @@ Schedule::command('events:send-reminders')
     ->withoutOverlapping()
     ->appendOutputTo(storage_path('logs/event-reminders.log'));
 
-Artisan::command('all_clear', function () {
+Artisan::command('all-clear', function () {
     Cache::flush();
     $this->info('App cache has been cleared');
 

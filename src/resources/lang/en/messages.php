@@ -128,7 +128,8 @@ return [
         'gabiDesc' => 'The last bastion of sanity in the project. A frontend developer who balances Wódz’s chaotic architectures with Chimek’s artistic visions — all while maintaining her unwavering composure. Her code is like a Swiss army knife: ready for anything and always working. Her collection of figurines and hamster photos serve as talismans, reminding her of the simplicity the whole team strives for. She once said, “I think it works” — and it was a historic moment.',
         'chimek' => 'Chimek',
         'chimekDesc' => 'A design master — an artist at heart, and in practice someone who debates a hover shade for 3 hours only to return to the first version. An eternal enthusiast of manga, anime, and anything with a “vibe.” When he’s not designing, he’s gaming — with the mantra “I’ll handle it tomorrow.” He has a thousand files named “final_v3_real,” each more beautiful than the last. When someone asks “why doesn’t it work?” he replies, “it’s an artistic decision.” And everyone nods in agreement.',
-    ],
+        'joke'=>'Please give us a very good rating (5) :)'
+        ],
 
 
     'settings' => [
@@ -651,4 +652,16 @@ return [
         'adminMenu' => 'Admin Menu',
     ],
 
+    'ban' => [
+        'title' => 'Account blocked',
+        'title2' => 'Your account has been blocked',
+        'messege' => 'We are sorry, but your account has been blocked due to violation of the terms of service. You currently do not have access to any features of the site.',
+        'message2' => 'If you think this is a mistake, please contact the administrator:',
+        'veryFunnyLink' => 'Please click',
+        'logout' => 'Log out',
+    ],
+
+    'reportusermodal' => [
+        'successReport' => 'Report User',
+    ],
 ];

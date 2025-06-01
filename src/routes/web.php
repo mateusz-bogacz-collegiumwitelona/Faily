@@ -11,6 +11,7 @@ use App\Http\Controllers\RideRequestController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\BannedController;
 
 Route::get('language/{locale}', [LanguageController::class, 'changeLanguage'])->name('language.change')->middleware(['locale']);
 Route::post('/toggle-theme', [ThemeController::class, 'toggleTheme'])->name('toggle.theme');
@@ -57,6 +58,8 @@ Route::middleware(['auth', 'verified', 'locale'])->group(function ()
     Route::get('/map', [MainMapController::class, 'showMap']);
     Route::get('/help', function () {return view('help');});
     Route::get('/my-attendances', [UserAttendancesController::class, 'index'])->name('user.attendances');
+
+
 });
 
 Route::middleware(['auth', 'verified', 'locale', 'admin'])->prefix('admin')->name('admin.')->group(function ()
@@ -73,6 +76,8 @@ Route::middleware(['auth', 'verified', 'locale', 'admin'])->prefix('admin')->nam
     Route::post('/reports/{id}/approve', [AdminController::class, 'approveReport'])->name('reports.approve');
     Route::post('/reports/{id}/reject', [AdminController::class, 'rejectReport'])->name('reports.reject');
 });
+
+Route::middleware(['auth', 'locale', 'banned'])->get('/banned', [BannedController::class, 'index'])->name('banned');
 
 Route::middleware(['auth', 'locale'])->post('/users/{id}/report', [ReportController::class, 'reportUser'])->name('users.report');
 

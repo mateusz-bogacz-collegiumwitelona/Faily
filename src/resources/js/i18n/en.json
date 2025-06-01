@@ -11,7 +11,8 @@
         "longitude": "Longitude:",
         "noResults": "No results",
         "alertGeolocalization": "Cannot determine your location",
-        "checkEvent": "Check"
+        "checkEvent": "Check",
+        "eventButton": "Go to the event"
     },
     "addevent": {
         "addEvent": "Add Event",

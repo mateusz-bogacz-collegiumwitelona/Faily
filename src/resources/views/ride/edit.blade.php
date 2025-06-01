@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ __('messages.title.ridesEdit') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         #map {
             height: 100% !important;
@@ -146,7 +145,7 @@
         }).addTo(map);
 
         const customIcon = L.icon({
-            iconUrl: '/images/includes/custom_marker.png',
+            iconUrl: '/images/includes/location_11111111111.png',
             iconSize: [40, 40],
             iconAnchor: [20, 40],
             popupAnchor: [0, -40]
@@ -215,7 +214,7 @@
 
             if (!latitude || !longitude || latitude === '0' || longitude === '0') {
                 e.preventDefault();
-                alert('Proszę wybrać miejsce spotkania na mapie lub wpisać adres.');
+                alert('Please select the meeting place on the map or enter the address.');
                 return false;
             }
         });

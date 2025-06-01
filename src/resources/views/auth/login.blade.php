@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                            <input type="checkbox" class="form-check-input chimkowy-checkbox" id="remember" name="remember">
                             <label class="form-check-label text-color" for="remember">{{ __('auth.authlogin.rememberMeLabel') }}</label>
                         </div>
 

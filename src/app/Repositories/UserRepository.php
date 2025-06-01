@@ -64,7 +64,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function incrementReportCount($userId)
     {
         $user = $this->find($userId);
-        $user->report_count = ($user->report_count ?? 0) + 1;
+        $user->reports_count = ($user->reports_count ?? 0) + 1;
         $user->save();
         return $user;
     }
@@ -72,7 +72,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function resetReportCount($userId)
     {
         $user = $this->find($userId);
-        $user->report_count = 0;
+        $user->reports_count = 0;
         $user->save();
         return $user;
     }

@@ -11,7 +11,8 @@
     "longitude": "経度:",
     "noResults": "結果なし",
     "alertGeolocalization": "位置情報を取得できません",
-    "checkEvent": "チェック"
+    "checkEvent": "チェック",
+    "eventButton": "イベントへ"
 },
     "addevent": {
         "addEvent": "イベントを追加",

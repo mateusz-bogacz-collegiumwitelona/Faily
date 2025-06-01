@@ -119,4 +119,11 @@ docker-compose down -v
 - `src/resources/js/components/` - komponenty Vue.js
 - `src/resources/css/` - pliki CSS i SCSS
 
+## Nadanie uprawnień admian użytkownikowi 
+```shell
+docker exec -it faily-app-dev bash
+php artisan user:make-admin 'email_użytkownika'
+
+```
+
 Ta instrukcja zawiera wszystkie niezbędne kroki do uruchomienia i pracy z projektem. W razie dodatkowych pytań, warto zajrzeć do oficjalnej dokumentacji Laravel i Vue.js.

@@ -18,11 +18,11 @@
                     <input type="date" class="form-control" id="date_to" name="date_to" value="{{ request('date_to') }}">
                 </div>
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="has_ride_sharing" name="has_ride_sharing" value="1" {{ request('has_ride_sharing') ? 'checked' : '' }}>
+                    <input class="form-check-input chimkowy-switch" type="checkbox" id="has_ride_sharing" name="has_ride_sharing" value="1" {{ request('has_ride_sharing') ? 'checked' : '' }}>
                     <label class="form-check-label" for="has_ride_sharing">{{ __('messages.eventlist.withTransportCheckbox') }}</label>
                 </div>
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="has_available_spots" name="has_available_spots" value="1" {{ request('has_available_spots') ? 'checked' : '' }}>
+                    <input class="form-check-input chimkowy-switch" type="checkbox" id="has_available_spots" name="has_available_spots" value="1" {{ request('has_available_spots') ? 'checked' : '' }}>
                     <label class="form-check-label" for="has_available_spots">{{ __('messages.eventlist.withFreeSpotsCheckbox') }}</label>
                 </div>
                 <button type="submit" class="btn btn-gradient text-color_2">{{ __('messages.eventlist.applyFiltersButton') }}</button>
